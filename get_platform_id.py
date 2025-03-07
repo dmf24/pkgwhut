@@ -56,4 +56,4 @@ def get_platform_id():
 
 # Example usage
 if __name__ == "__main__":
-    print(f"Platform ID: {get_platform_id()}")
+    print(get_platform_id())
