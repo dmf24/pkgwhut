@@ -11,7 +11,7 @@ from get_platform_id import get_platform_id
 commands = {
     'which-package-has-file': {
         'Debian': 'dpkg --search {0}',
-        'CentOS': 'repoquery --installed -f {0}',
+        'CentOS Linux': 'repoquery --installed -f {0}',
         'Red Hat Enterprise Linux': 'dnf repoquery --installed --file {0}',
         'Ubuntu': 'dpkg --search {0}',
         'Pop!_OS': 'dpkg --search {0}',
@@ -26,7 +26,7 @@ commands = {
     },
     'installed-packages': {
         'Debian': 'dpkg -l',
-        'CentOS': 'yum list installed',
+        'CentOS Linux': 'yum list installed',
         'Red Hat Enterprise Linux': 'dnf list installed',
         'Ubuntu': 'dpkg -l',
         'Pop!_OS': 'dpkg -l',
@@ -41,7 +41,7 @@ commands = {
     },
     'files-in-package': {
         'Debian': 'dpkg -L {0}',
-        'CentOS': 'repoquery --installed -l {0}',
+        'CentOS Linux': 'repoquery --installed -l {0}',
         'Red Hat Enterprise Linux': 'rpm -ql {0}',
         'Ubuntu': 'dpkg -L {0}',
         'Pop!_OS': 'dpkg -L {0}',
@@ -56,7 +56,7 @@ commands = {
     },
     'package-info': {
         'Debian': 'aptitude show {0}',
-        'CentOS': 'yum info {0}',
+        'CentOS Linux': 'yum info {0}',
         'Red Hat Enterprise Linux': 'dnf info {0}',
         'Ubuntu': 'apt show {0}',
         'Pop!_OS': 'apt show {0}',
