@@ -1,36 +1,43 @@
-HTTP/1.1 200 OK
-date: Fri, 07 Mar 2025 16:36:15 GMT
-server: Apache
-last-modified: Fri, 07 Mar 2025 16:34:59 GMT
-etag: "b3c-62fc3341846ab"
-accept-ranges: bytes
-content-length: 2876
-webconf2: rccg-sandbox-dev01.rc.hms.harvard.edu
-strict-transport-security: max-age=15768000
-
 import sys,os
 import platform
 from scripting import process
 #import yaml
 
-commands={'which-package-has-file': {'debian': 'dpkg --search {0}',
-                                     'CentOS': 'repoquery --installed -f {0}',
-                                     'CentOS Linux': 'repoquery --installed -f {0}',
-                                     'Red Hat Enterprise Linux': 'dnf repoquery --installed --file {0}'
-                                     },
-          'installed-packages': {'debian': 'dpkg -l',
-                                 'CentOS': 'yum list installed',
-                                 'CentOS Linux': 'yum list installed',
-                                 'Red Hat Enterprise Linux': 'dnf list installed'
-                                 },
-          'files-in-package': {'debian': 'dpkg -L {0}',
-                               'CentOS': 'repoquery --installed -l {0}',
-                               'CentOS Linux': 'repoquery --installed -l {0}',
-                               },
-          'package-info': {'debian': 'aptitude show {0}',
-                           'CentOS': 'yum info {0}',
-                           'CentOS Linux': 'yum info {0}'
-                           }}
+
+commands = {
+    'which-package-has-file': {
+        'debian': 'dpkg --search {0}',
+        'CentOS': 'repoquery --installed -f {0}',
+        'CentOS Linux': 'repoquery --installed -f {0}',
+        'Red Hat Enterprise Linux': 'dnf repoquery --installed --file {0}',
+        'Ubuntu': 'dpkg --search {0}',
+        'Cygwin': 'cygcheck -f {0}'
+    },
+    'installed-packages': {
+        'debian': 'dpkg -l',
+        'CentOS': 'yum list installed',
+        'CentOS Linux': 'yum list installed',
+        'Red Hat Enterprise Linux': 'dnf list installed',
+        'Ubuntu': 'dpkg -l',
+        'Cygwin': 'cygcheck -c'
+    },
+    'files-in-package': {
+        'debian': 'dpkg -L {0}',
+        'CentOS': 'repoquery --installed -l {0}',
+        'CentOS Linux': 'repoquery --installed -l {0}',
+        'Red Hat Enterprise Linux': 'rpm -ql {0}',
+        'Ubuntu': 'dpkg -L {0}',
+        'Cygwin': 'cygcheck -l {0}'
+    },
+    'package-info': {
+        'debian': 'aptitude show {0}',
+        'CentOS': 'yum info {0}',
+        'CentOS Linux': 'yum info {0}',
+        'Red Hat Enterprise Linux': 'dnf info {0}',
+        'Ubuntu': 'apt show {0}',
+        'Cygwin': 'apt-cyg show {0}'  # Note: requires apt-cyg tool
+    }
+}
 
 #commands=yaml.load("""---
 #cmds:
